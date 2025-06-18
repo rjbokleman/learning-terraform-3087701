@@ -64,8 +64,8 @@ module "blog-sg" {
   #vpc_id              = data.aws_vpc.default.id
   #Using the aws/vpc module instead of the above.
 
-  vpc_id = module.blog_vpc.default_vpc_id
-  
+  vpc_id = module.blog_vpc.vpc_id
+
   ingress_rules       = ["http-80-tcp","https-443-tcp"]
   ingress_cidr_blocks = [ "0.0.0.0/0" ]
 
