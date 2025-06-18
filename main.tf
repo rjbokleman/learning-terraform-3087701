@@ -23,7 +23,7 @@ resource "aws_instance" "blog" {
   instance_type = var.instance_type
 
   # # Add aws security group to the VPC the EC2 instance lives in as defined below.
-  # vpc_security_group_ids = [aws_security_group.blog.id]
+  vpc_security_group_ids = [aws_security_group.blog.id]
 
   # Add aws security group to the VPC the EC2 instance lives in as defined using the module.
   vpc_security_group_ids = [module.blog-sg.security_group_id]
