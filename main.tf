@@ -23,7 +23,7 @@ resource "aws_instance" "blog" {
   instance_type = var.instance_type
 
   # # Add aws security group to the VPC the EC2 instance lives in as defined below.
-  vpc_security_group_ids = [aws_security_group.blog.id]
+  # vpc_security_group_ids = [aws_security_group.blog.id]
 
   # Add aws security group to the VPC the EC2 instance lives in as defined using the module.
   vpc_security_group_ids = [module.blog-sg.security_group_id]
@@ -47,43 +47,43 @@ module "blog-sg" {
 }
 
 
-# Create new aws_security_group in the default vpc.
-resource "aws_security_group" "blog" {
-  name        = "blob"
-  description = "Allow http and https in.  Allow everything out."
+# # Create new aws_security_group in the default vpc.
+# resource "aws_security_group" "blog" {
+#   name        = "blob"
+#   description = "Allow http and https in.  Allow everything out."
 
-  vpc_id = data.aws_vpc.default.id
-}
+#   vpc_id = data.aws_vpc.default.id
+# }
 
-# Create new security group ingress rule for default vpc 80.
-resource "aws_security_group_rule" "blog_http_in" {
-  type        = "ingress"
-  from_port   = 80
-  to_port     = 80
-  protocol    = "tcp"
-  cidr_blocks = [ "0.0.0.0/0" ]
+# # Create new security group ingress rule for default vpc 80.
+# resource "aws_security_group_rule" "blog_http_in" {
+#   type        = "ingress"
+#   from_port   = 80
+#   to_port     = 80
+#   protocol    = "tcp"
+#   cidr_blocks = [ "0.0.0.0/0" ]
 
-  security_group_id = aws_security_group.blog.id
-}
+#   security_group_id = aws_security_group.blog.id
+# }
 
-# Create new security group ingress rule for default vpc 443.
-resource "aws_security_group_rule" "blog_https_in" {
-  type        = "ingress"
-  from_port   = 443
-  to_port     = 443
-  protocol    = "tcp"
-  cidr_blocks = [ "0.0.0.0/0" ]
+# # Create new security group ingress rule for default vpc 443.
+# resource "aws_security_group_rule" "blog_https_in" {
+#   type        = "ingress"
+#   from_port   = 443
+#   to_port     = 443
+#   protocol    = "tcp"
+#   cidr_blocks = [ "0.0.0.0/0" ]
 
-  security_group_id = aws_security_group.blog.id
-}
+#   security_group_id = aws_security_group.blog.id
+# }
 
-# Create new security group egress rule for default vpc.
-resource "aws_security_group_rule" "blog_everything_out" {
-  type        = "egress"
-  from_port   = 0
-  to_port     = 0
-  protocol    = "-1"
-  cidr_blocks = [ "0.0.0.0/0" ]
+# # Create new security group egress rule for default vpc.
+# resource "aws_security_group_rule" "blog_everything_out" {
+#   type        = "egress"
+#   from_port   = 0
+#   to_port     = 0
+#   protocol    = "-1"
+#   cidr_blocks = [ "0.0.0.0/0" ]
 
-  security_group_id = aws_security_group.blog.id
-}
+#   security_group_id = aws_security_group.blog.id
+# }
